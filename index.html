@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FundRank Pro | Prop Firm 对比与优惠</title>
+    <meta
+      name="description"
+      content="专业 Prop Firm 对比平台，筛选账户规模、价格、分润、规则、评分与优惠码。"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#" aria-label="FundRank Pro 首页">
+        <span class="brand-mark">FR</span>
+        <span>FundRank Pro</span>
+      </a>
+      <nav class="main-nav" aria-label="主导航">
+        <a href="#compare">Prop Firms</a>
+        <a href="#deals">Deals</a>
+        <a href="#rules">Rules</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a class="header-action" href="#compare">开始对比</a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Prop trading firm comparison</p>
+          <h1>找到更适合你的 Prop Firm 账户</h1>
+          <p class="hero-text">
+            按账户规模、挑战价格、分润、最大回撤、新闻交易、出金周期和社区评分快速筛选。
+            页面内置榜单、优惠码和规则摘要，适合交易员做第一轮尽调。
+          </p>
+          <div class="hero-actions">
+            <a class="primary-button" href="#compare">查看排名</a>
+            <a class="secondary-button" href="#deals">领取优惠</a>
+          </div>
+          <div class="hero-stats" aria-label="平台统计">
+            <span><strong>38</strong> firms tracked</span>
+            <span><strong>126</strong> account plans</span>
+            <span><strong>Daily</strong> rule checks</span>
+          </div>
+        </div>
+        <div class="hero-media" aria-label="交易员评分面板预览">
+          <img src="./assets/trading-dashboard.png" alt="Prop firm comparison dashboard preview" />
+        </div>
+      </section>
+
+      <section class="quick-finder" aria-label="快速筛选">
+        <div>
+          <p class="section-kicker">Smart finder</p>
+          <h2>三步缩小候选名单</h2>
+        </div>
+        <div class="finder-grid">
+          <label>
+            账户规模
+            <select id="sizeFilter">
+              <option value="all">全部规模</option>
+              <option value="25">25K+</option>
+              <option value="50">50K+</option>
+              <option value="100">100K+</option>
+              <option value="200">200K+</option>
+            </select>
+          </label>
+          <label>
+            策略偏好
+            <select id="strategyFilter">
+              <option value="all">全部策略</option>
+              <option value="news">允许新闻交易</option>
+              <option value="ea">允许 EA</option>
+              <option value="swing">适合隔夜持仓</option>
+            </select>
+          </label>
+          <label>
+            预算上限
+            <input id="budgetFilter" type="range" min="120" max="1100" value="1100" step="10" />
+            <span id="budgetLabel">$1,100</span>
+          </label>
+        </div>
+      </section>
+
+      <section class="ranked-section" id="compare">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Live comparison</p>
+            <h2>Prop Firm 排名表</h2>
+          </div>
+          <div class="table-tools">
+            <div class="search-box">
+              <span aria-hidden="true">⌕</span>
+              <input id="searchInput" type="search" placeholder="搜索 firm、平台或规则" />
+            </div>
+            <select id="sortSelect" aria-label="排序">
+              <option value="score">按评分排序</option>
+              <option value="price">按价格排序</option>
+              <option value="payout">按分润排序</option>
+              <option value="drawdown">按回撤排序</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Firm</th>
+                <th>账户</th>
+                <th>价格</th>
+                <th>分润</th>
+                <th>回撤</th>
+                <th>规则</th>
+                <th>评分</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody id="firmRows"></tbody>
+          </table>
+          <p class="empty-state" id="emptyState" hidden>没有匹配结果，放宽筛选条件试试。</p>
+        </div>
+      </section>
+
+      <section class="deals-section" id="deals">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Verified offers</p>
+            <h2>本周优惠码</h2>
+          </div>
+          <p class="muted">优惠信息请在下单前到官方页面二次确认。</p>
+        </div>
+        <div class="deal-grid" id="dealGrid"></div>
+      </section>
+
+      <section class="insight-band" id="rules">
+        <div>
+          <p class="section-kicker">Risk checklist</p>
+          <h2>选择 Prop Firm 前先看这 4 件事</h2>
+        </div>
+        <div class="insight-grid">
+          <article>
+            <span class="icon-dot">1</span>
+            <h3>回撤模型</h3>
+            <p>优先区分静态、日内、追踪回撤，避免盈利后可用风险反而变小。</p>
+          </article>
+          <article>
+            <span class="icon-dot">2</span>
+            <h3>出金节奏</h3>
+            <p>看首次出金等待期、最低出金额和后续周期，而不只看最高分润。</p>
+          </article>
+          <article>
+            <span class="icon-dot">3</span>
+            <h3>策略限制</h3>
+            <p>新闻、EA、复制交易、隔夜和周末持仓规则要与自己的交易系统匹配。</p>
+          </article>
+          <article>
+            <span class="icon-dot">4</span>
+            <h3>费用与退款</h3>
+            <p>低挑战费不一定低成本，关注重置费、扩容费和退款触发条件。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="faq" id="faq">
+        <div>
+          <p class="section-kicker">FAQ</p>
+          <h2>常见问题</h2>
+        </div>
+        <details open>
+          <summary>这个网站可以直接用于真实业务吗？</summary>
+          <p>可以作为前端原型和营销页面基础。真实上线前需要接入后台、数据审核流程、联盟链接管理和法律披露。</p>
+        </details>
+        <details>
+          <summary>Prop Firm 数据应该多久更新一次？</summary>
+          <p>规则、价格和优惠码建议每日检查；投诉、出金速度和评分适合按周汇总。</p>
+        </details>
+        <details>
+          <summary>如何避免看起来像简单搬运站？</summary>
+          <p>加入独立评分模型、规则变更日志、用户出金验证和透明的筛选维度，价值会明显更强。</p>
+        </details>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>FundRank Pro</span>
+      <span>Independent prop firm research, comparison and deal tracking.</span>
+    </footer>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
