@@ -39,9 +39,15 @@
             <a class="secondary-button" href="#deals">领取优惠</a>
           </div>
           <div class="hero-stats" aria-label="平台统计">
-            <span><strong>38</strong> firms tracked</span>
-            <span><strong>126</strong> account plans</span>
+            <span><strong id="trackedCount">38</strong> firms tracked</span>
+            <span><strong id="plansCount">126</strong> account plans</span>
             <span><strong>Daily</strong> rule checks</span>
+          </div>
+          <div class="featured-strip" aria-label="精选 Prop Firms">
+            <span>Lucid Trading</span>
+            <span>Top One Trader</span>
+            <span>YRM Funding</span>
+            <span>Topstep</span>
           </div>
         </div>
         <div class="hero-media" aria-label="交易员评分面板预览">
@@ -87,6 +93,7 @@
           <div>
             <p class="section-kicker">Live comparison</p>
             <h2>Prop Firm 排名表</h2>
+            <p class="section-note">按你的预算与策略偏好实时收窄，优先看规则匹配，再看折扣。</p>
           </div>
           <div class="table-tools">
             <div class="search-box">
@@ -101,6 +108,10 @@
             </select>
           </div>
         </div>
+        <div class="result-bar" aria-live="polite">
+          <span id="resultCount">0 firms matched</span>
+          <span id="activeFilters">全部账户 · 全部策略 · $1,100 以下</span>
+        </div>
 
         <div class="table-wrap">
           <table>
@@ -108,6 +119,7 @@
               <tr>
                 <th>Firm</th>
                 <th>账户</th>
+                <th>类型</th>
                 <th>价格</th>
                 <th>分润</th>
                 <th>回撤</th>
@@ -128,7 +140,7 @@
             <p class="section-kicker">Verified offers</p>
             <h2>本周优惠码</h2>
           </div>
-          <p class="muted">优惠信息请在下单前到官方页面二次确认。</p>
+          <p class="muted">已突出显示你指定的 QA 与 YYDS 码；下单前仍建议到官方页面二次确认。</p>
         </div>
         <div class="deal-grid" id="dealGrid"></div>
       </section>

@@ -180,6 +180,13 @@ h3 {
   font-size: 18px;
 }
 
+.section-note {
+  max-width: 620px;
+  margin: 10px 0 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
 .hero-text {
   max-width: 680px;
   color: #43515f;
@@ -216,6 +223,26 @@ h3 {
 
 .hero-stats strong {
   color: var(--ink);
+}
+
+.featured-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.featured-strip span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 11px;
+  border: 1px solid rgba(14, 143, 121, 0.24);
+  border-radius: 8px;
+  color: var(--accent-dark);
+  background: #eefaf7;
+  font-size: 13px;
+  font-weight: 800;
 }
 
 .hero-media {
@@ -316,6 +343,25 @@ input[type="range"] {
   border: 0;
 }
 
+.result-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 12px;
+  padding: 12px 14px;
+  border: 1px solid #cfe0df;
+  border-radius: 8px;
+  color: #38515c;
+  background: #f3fbfa;
+  font-size: 14px;
+}
+
+.result-bar span:first-child {
+  color: var(--accent-dark);
+  font-weight: 850;
+}
+
 .table-wrap {
   overflow-x: auto;
   border: 1px solid var(--line);
@@ -326,7 +372,7 @@ input[type="range"] {
 
 table {
   width: 100%;
-  min-width: 980px;
+  min-width: 1080px;
   border-collapse: collapse;
 }
 
@@ -348,7 +394,7 @@ th {
 }
 
 tbody tr:hover {
-  background: #fbf8ee;
+  background: #f7fbfa;
 }
 
 .firm-cell {
@@ -370,7 +416,10 @@ tbody tr:hover {
 }
 
 .firm-name {
-  display: block;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
   font-weight: 850;
 }
 
@@ -397,6 +446,32 @@ tbody tr:hover {
   color: #3c4957;
   font-size: 12px;
   font-weight: 750;
+}
+
+.recommended-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 0 7px;
+  border-radius: 999px;
+  color: #7a4d00;
+  background: #fff1c7;
+  font-size: 11px;
+  font-weight: 850;
+}
+
+.type-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 9px;
+  border: 1px solid #cfdbe3;
+  border-radius: 8px;
+  color: #2e475a;
+  background: #f7fafc;
+  font-size: 12px;
+  font-weight: 850;
+  white-space: nowrap;
 }
 
 .score {
@@ -454,8 +529,27 @@ tbody tr:hover {
 }
 
 .deal-card {
+  position: relative;
   padding: 20px;
   box-shadow: 0 12px 32px rgba(21, 42, 61, 0.07);
+}
+
+.deal-card-featured {
+  border-color: rgba(14, 143, 121, 0.42);
+  background:
+    linear-gradient(180deg, rgba(238, 250, 247, 0.86), rgba(255, 255, 255, 0) 48%),
+    #fff;
+}
+
+.deal-card-featured::before {
+  content: "Recommended code";
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  color: var(--accent-dark);
+  font-size: 11px;
+  font-weight: 850;
+  text-transform: uppercase;
 }
 
 .deal-top {
@@ -476,6 +570,12 @@ tbody tr:hover {
   color: var(--accent-dark);
   background: #eefaf7;
   font-weight: 850;
+}
+
+.deal-card-featured .deal-code {
+  border-color: var(--gold);
+  color: #7a4d00;
+  background: #fff7df;
 }
 
 .muted,
@@ -578,6 +678,11 @@ tbody tr:hover {
 
   .section-heading {
     align-items: stretch;
+    flex-direction: column;
+  }
+
+  .result-bar {
+    align-items: flex-start;
     flex-direction: column;
   }
 
@@ -684,6 +789,12 @@ tbody tr:hover {
   .row-actions {
     width: 100%;
     justify-content: flex-end;
+  }
+
+  .deal-card-featured::before {
+    position: static;
+    display: inline-flex;
+    margin-bottom: 10px;
   }
 
   .site-footer {

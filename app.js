@@ -3,6 +3,7 @@ const firms = [
     name: "Apex Trader Funding",
     initials: "AT",
     platform: "Tradovate / Rithmic",
+    type: "Futures",
     account: 100,
     price: 207,
     payout: 90,
@@ -18,6 +19,7 @@ const firms = [
     name: "FTMO",
     initials: "FT",
     platform: "MT4 / MT5 / cTrader",
+    type: "Forex CFD",
     account: 200,
     price: 1080,
     payout: 90,
@@ -33,6 +35,7 @@ const firms = [
     name: "The5ers",
     initials: "5R",
     platform: "MT5",
+    type: "Forex CFD",
     account: 100,
     price: 495,
     payout: 100,
@@ -48,12 +51,13 @@ const firms = [
     name: "Topstep",
     initials: "TS",
     platform: "TopstepX / NinjaTrader",
+    type: "Futures",
     account: 150,
     price: 149,
     payout: 90,
     drawdown: 4500,
     score: 4.5,
-    tags: ["futures", "coaching", "simple rules"],
+    tags: ["futures", "coaching", "top step"],
     strategy: ["news"],
     coupon: "TOP20",
     deal: "首月挑战费用优惠",
@@ -63,6 +67,7 @@ const firms = [
     name: "FundedNext",
     initials: "FN",
     platform: "MT4 / MT5",
+    type: "Forex CFD",
     account: 200,
     price: 999,
     payout: 95,
@@ -78,6 +83,7 @@ const firms = [
     name: "Blue Guardian",
     initials: "BG",
     platform: "MT5",
+    type: "Forex CFD",
     account: 50,
     price: 297,
     payout: 85,
@@ -88,6 +94,86 @@ const firms = [
     coupon: "BLUE12",
     deal: "精选账户 12% off",
     color: "#1f8aaf",
+  },
+  {
+    name: "Lucid Trading",
+    initials: "LU",
+    platform: "Match-Trader / MT5",
+    type: "Forex CFD",
+    account: 100,
+    price: 549,
+    payout: 90,
+    drawdown: 8000,
+    score: 4.5,
+    tags: ["lucid", "instant", "news"],
+    strategy: ["news", "ea"],
+    coupon: "LUCID15",
+    deal: "Lucid challenge 15% off",
+    color: "#14a085",
+  },
+  {
+    name: "Top One Trader",
+    initials: "TO",
+    platform: "TradeLocker / MT5",
+    type: "Forex CFD",
+    account: 200,
+    price: 950,
+    payout: 90,
+    drawdown: 10000,
+    score: 4.3,
+    tags: ["top one", "scaling", "ea"],
+    strategy: ["ea", "swing"],
+    coupon: "YYDS",
+    deal: "Top One selected plans 20% off",
+    color: "#4656d9",
+  },
+  {
+    name: "YRM Funding",
+    initials: "YR",
+    platform: "MT5 / Match-Trader",
+    type: "Forex CFD",
+    account: 100,
+    price: 499,
+    payout: 85,
+    drawdown: 7000,
+    score: 4.1,
+    tags: ["yrm", "low target", "weekend hold"],
+    strategy: ["swing", "ea"],
+    coupon: "QA",
+    deal: "YRM evaluation 10% off",
+    color: "#be4b73",
+  },
+  {
+    name: "MyFundedFutures",
+    initials: "MF",
+    platform: "Tradovate / NinjaTrader",
+    type: "Futures",
+    account: 150,
+    price: 225,
+    payout: 90,
+    drawdown: 4500,
+    score: 4.4,
+    tags: ["futures", "fast payout", "news"],
+    strategy: ["news"],
+    coupon: "MFF25",
+    deal: "Futures evaluation 25% off",
+    color: "#0f766e",
+  },
+  {
+    name: "Take Profit Trader",
+    initials: "TP",
+    platform: "Rithmic / Tradovate",
+    type: "Futures",
+    account: 150,
+    price: 170,
+    payout: 80,
+    drawdown: 4500,
+    score: 4.2,
+    tags: ["futures", "simple rules", "drawdown"],
+    strategy: ["news", "swing"],
+    coupon: "TAKE20",
+    deal: "Monthly futures challenge 20% off",
+    color: "#c26d2b",
   },
 ];
 
@@ -109,6 +195,10 @@ const budgetFilter = document.querySelector("#budgetFilter");
 const budgetLabel = document.querySelector("#budgetLabel");
 const sortSelect = document.querySelector("#sortSelect");
 const dealGrid = document.querySelector("#dealGrid");
+const trackedCount = document.querySelector("#trackedCount");
+const plansCount = document.querySelector("#plansCount");
+const resultCount = document.querySelector("#resultCount");
+const activeFilters = document.querySelector("#activeFilters");
 
 function money(value) {
   return new Intl.NumberFormat("en-US", {
@@ -125,7 +215,7 @@ function getFilteredFirms() {
     .filter((firm) => {
       const matchesQuery =
         !query ||
-        [firm.name, firm.platform, ...firm.tags].join(" ").toLowerCase().includes(query);
+        [firm.name, firm.platform, firm.type, ...firm.tags].join(" ").toLowerCase().includes(query);
       const matchesSize = state.size === "all" || firm.account >= Number(state.size);
       const matchesStrategy =
         state.strategy === "all" || firm.strategy.includes(state.strategy);
@@ -145,21 +235,24 @@ function renderRows() {
   const filtered = getFilteredFirms();
   rowsEl.innerHTML = "";
   emptyEl.hidden = filtered.length > 0;
+  renderResultState(filtered.length);
 
   filtered.forEach((firm) => {
     const row = document.createElement("tr");
     const isFavorite = state.favorites.has(firm.name);
+    const isFeatured = ["Top One Trader", "YRM Funding", "Lucid Trading", "Topstep"].includes(firm.name);
     row.innerHTML = `
       <td data-label="Firm">
         <div class="firm-cell">
           <span class="firm-logo" style="background:${firm.color}">${firm.initials}</span>
           <span>
-            <span class="firm-name">${firm.name}</span>
+            <span class="firm-name">${firm.name}${isFeatured ? '<span class="recommended-badge">Featured</span>' : ""}</span>
             <span class="firm-meta">${firm.platform}</span>
           </span>
         </div>
       </td>
       <td data-label="账户">${firm.account}K</td>
+      <td data-label="类型"><span class="type-pill">${firm.type}</span></td>
       <td data-label="价格">${money(firm.price)}</td>
       <td data-label="分润">${firm.payout}%</td>
       <td data-label="回撤">${money(firm.drawdown)}</td>
@@ -180,10 +273,14 @@ function renderRows() {
 
 function renderDeals() {
   dealGrid.innerHTML = firms
-    .slice(0, 3)
+    .filter((firm) =>
+      ["Lucid Trading", "Top One Trader", "YRM Funding", "Topstep", "Apex Trader Funding", "FTMO"].includes(
+        firm.name,
+      ),
+    )
     .map(
       (firm) => `
-        <article class="deal-card">
+        <article class="deal-card ${["YYDS", "QA"].includes(firm.coupon) ? "deal-card-featured" : ""}">
           <div class="deal-top">
             <div>
               <strong>${firm.name}</strong>
@@ -196,6 +293,25 @@ function renderDeals() {
       `,
     )
     .join("");
+}
+
+function renderStats() {
+  trackedCount.textContent = firms.length;
+  plansCount.textContent = firms.reduce((sum, firm) => sum + Math.max(2, Math.round(firm.account / 25)), 0);
+}
+
+function renderResultState(count) {
+  const sizeText = state.size === "all" ? "全部账户" : `${state.size}K+ 账户`;
+  const strategyText =
+    {
+      all: "全部策略",
+      news: "允许新闻交易",
+      ea: "允许 EA",
+      swing: "适合隔夜持仓",
+    }[state.strategy] || "全部策略";
+
+  resultCount.textContent = `${count} firms matched`;
+  activeFilters.textContent = `${sizeText} · ${strategyText} · ${money(state.budget)} 以下`;
 }
 
 searchInput.addEventListener("input", (event) => {
@@ -249,5 +365,6 @@ document.addEventListener("click", async (event) => {
 });
 
 budgetLabel.textContent = money(state.budget);
+renderStats();
 renderRows();
 renderDeals();
