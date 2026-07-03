@@ -80,6 +80,22 @@ const firms = [
     color: "#7a4fc4",
   },
   {
+    name: "FundedNext 考试盘",
+    initials: "FE",
+    platform: "MT4 / MT5",
+    type: "Exam",
+    account: 100,
+    price: 549,
+    payout: 90,
+    drawdown: 8000,
+    score: 4.5,
+    tags: ["fundednext", "考试盘", "QA code"],
+    strategy: ["news", "ea", "swing"],
+    coupon: "QA",
+    deal: "FundedNext 考试盘专属优惠码 QA",
+    color: "#5b4bc4",
+  },
+  {
     name: "Blue Guardian",
     initials: "BG",
     platform: "MT5",
@@ -274,9 +290,15 @@ function renderRows() {
 function renderDeals() {
   dealGrid.innerHTML = firms
     .filter((firm) =>
-      ["Lucid Trading", "Top One Trader", "YRM Funding", "Topstep", "Apex Trader Funding", "FTMO"].includes(
-        firm.name,
-      ),
+      [
+        "Lucid Trading",
+        "Top One Trader",
+        "YRM Funding",
+        "FundedNext 考试盘",
+        "Topstep",
+        "Apex Trader Funding",
+        "FTMO",
+      ].includes(firm.name),
     )
     .map(
       (firm) => `
